@@ -1,2 +1,3 @@
 # 2023-1-Grupo-3
-Ola
+## Primer commit 25-04
+Se realizó el tutorial de Django en el repositorio
