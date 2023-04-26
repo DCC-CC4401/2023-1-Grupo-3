@@ -7,9 +7,7 @@ def login(request):
     credenciales = Usuario.objects.all()
 
     if request.method == "GET":
-        print("Se registro")
         return render(request, "usuarios/login.html", {"credenciales": credenciales, "form_login": NuevaTareaForm()})
     
     if request.method == "POST":
-        print("Se loggeo")
-        return HttpResponse()
+        return "Not implemented yet"
