@@ -56,7 +56,7 @@ ROOT_URLCONF = 'resenas_cool.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['usuarios/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
