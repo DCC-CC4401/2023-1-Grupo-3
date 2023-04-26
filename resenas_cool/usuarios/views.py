@@ -1,3 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from usuarios.models import Usuario
 
-# Create your views here.
+def login(request):
+    credenciales = Usuario.objects.all()
+
+    if request.method == "GET":
+        print("Se registro")
+        return HttpResponse()
+    
+    if request.method == "POST":
+        print("Se loggeo")
+        return HttpResponse()
