@@ -8,8 +8,6 @@ class Usuario(models.Model):
     password = models.CharField(max_length=25)
     email = models.CharField(max_length=100)
     
-    #categoria = models.ForeignKey(Categoria, default="general", on_delete=models.CASCADE)  # la llave foránea
-
     def __str__(self):
         return self.user_name # name to be shown when called
 
