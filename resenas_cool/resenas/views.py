@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
-from resenas.forms import NuevaResenaForm
+from resenas.forms import NuevaResenaModelForm
 from resenas.models import Resenas, Categorias
 
 
 def nueva_resena(request):
   
   if request.method == "GET":
-     form_resena = NuevaResenaForm()
+     form_resena = NuevaResenaModelForm()
      return render(request, "../templates/nueva_resena.html", {"form_resena": form_resena})
   
   if request.method == "POST":  
@@ -18,6 +18,8 @@ def nueva_resena(request):
         descripcion = request.POST["descripcion"]
         foto = request.POST["foto"]
         
-        nueva_resena = Resena(nombre_producto=nombre_producto, titulo=titulo, descripcion=descripcion, id_categoria=categoria.id, id_usuario=request.user, foto=foto)
-        nueva_resena.save()  
+        nueva_resena = Resenas(nombre_producto=nombre_producto, titulo=titulo, descripcion=descripcion, id_categoria=categoria.id, id_usuario=request.user, foto=foto)
+        if nueva_resena.is_valid():
+           nueva_resena.save()
+           
         return redirect('/resenas')
