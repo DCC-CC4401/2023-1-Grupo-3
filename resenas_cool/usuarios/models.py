@@ -5,10 +5,10 @@ from django.utils import timezone
 
 class Usuario(AbstractUser):  
     id = models.AutoField(primary_key=True)  
-    user_name = models.CharField(max_length=25) 
+    username = models.CharField(max_length=25, unique=True) 
     password = models.CharField(max_length=25)
     email = models.CharField(max_length=100)
     
     def __str__(self):
-        return self.user_name # name to be shown when called
+        return self.username # name to be shown when called
 
