@@ -18,12 +18,16 @@ import sys
 import os
 
 sys.path.append(os.path.join(os.path.dirname('views.py'), 'usuarios'))
+sys.path.append(os.path.join(os.path.dirname('views.py'), 'resenas'))
 
 from django.contrib import admin
 from django.urls import path
 from usuarios import views
+from resenas import views as views_r
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login', views.login, name = 'login'),
+    path('register', views.register, name = 'register'),
+    path('nueva_resena', views_r.nueva_resena, name = 'nueva_resena'),
 ]

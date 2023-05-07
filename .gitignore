@@ -229,3 +229,12 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,django,visualstudiocode,venv
+resenas_cool/usuarios/__pycache__/models.cpython-310.pyc
+resenas_cool/resenas_cool/__pycache__/__init__.cpython-310.pyc
+resenas_cool/resenas_cool/__pycache__/settings.cpython-310.pyc
+resenas_cool/resenas_cool/__pycache__/urls.cpython-310.pyc
+resenas_cool/resenas_cool/__pycache__/wsgi.cpython-310.pyc
+resenas_cool/usuarios/__pycache__/__init__.cpython-310.pyc
+resenas_cool/usuarios/__pycache__/admin.cpython-310.pyc
+resenas_cool/usuarios/__pycache__/apps.cpython-310.pyc
+resenas_cool/usuarios/__pycache__/models.cpython-310.pyc
