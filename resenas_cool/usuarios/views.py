@@ -12,10 +12,10 @@ def login(request):
         return render(request, "usuarios/login.html", {"credenciales": credenciales, "form_login": LoginForm()})
     
     if request.method == "POST":
-        user_name = request.POST["nombre"]
+        username = request.POST["nombre"]
         password = request.POST["contraseña"]
 
-        if Usuario.objects.filter(user_name=user_name, password=password).exists():
+        if Usuario.objects.filter(username=username, password=password).exists():
             print("Usuario encontrado")
             return HttpResponseRedirect("nueva_resena")
         
@@ -28,8 +28,13 @@ def register(request):
     if request.method == "GET":
         return render(request, "usuarios/register.html", {"credenciales": credenciales, "form_register": RegisterForm()})
     if request.method == "POST":
-        user_name = request.POST["nombre"]
+        username = request.POST["nombre"]
         password = request.POST["contraseña"]
 
-        usuario = Usuario.objects.create(user_name=user_name, password=password)
+        # Checkeo de largo
+        if len(username) < 5:
+            messages.error(request, "Nombre de usuario demasiado corto, debe ser a lo menos 5")
+            return HttpResponseRedirect("login")
+
+        usuario = Usuario.objects.create(username=username, password=password)
         return HttpResponseRedirect("login")    
