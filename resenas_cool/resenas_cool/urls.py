@@ -30,4 +30,5 @@ urlpatterns = [
     path('login', views.login, name = 'login'),
     path('register', views.register, name = 'register'),
     path('nueva_resena', views_r.nueva_resena, name = 'nueva_resena'),
+    path('mostrar_resena/<int:review_id>/', views_r.mostrar_resena, name = 'mostrar_resena'),
 ]
