@@ -12,8 +12,8 @@
             <h2> Login </h2>
             <br>
             <form action="" method="post">
-                {{ form_login.as_p }}
                 {% csrf_token %}
+                {{ form_login.as_p }}
                 <button class="btn btn-primary" name="sendLogIn" type="submit">Iniciar Sesion</button>
                 
             </form>

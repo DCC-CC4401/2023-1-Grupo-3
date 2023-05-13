@@ -10,16 +10,7 @@ class NuevaResenaModelForm(forms.ModelForm):
 
    class Meta:
       model = Resenas
-      fields = ['nombre_producto', 'titulo', 'categoria', 'descripcion']
-   
-   def __init__(self, *args, **kwargs):
-        instance = kwargs.get('instance')
-        if instance:
-            self.fields['nombre_producto'].initial = instance.nombre_producto
-            self.fields['titulo'].initial = instance.titulo
-            self.fields['categoria'].initial = instance.categoria
-            self.fields['descripcion'].initial = instance.descripcion
-        super().__init__(*args, **kwargs)
+      fields = ['nombre_producto', 'titulo', 'categoria', 'descripcion'] #le saque foto
    
    def clean_nombre_producto(self):
       field = self.cleaned_data.get("nombre_producto")
