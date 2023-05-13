@@ -6,11 +6,11 @@ class NuevaResenaModelForm(forms.ModelForm):
    titulo = forms.CharField(label="Título de la Reseña")
    categoria = forms.ModelChoiceField(queryset=Categorias.objects.all())
    descripcion = forms.CharField(widget=forms.Textarea()) 
-   foto = forms.ImageField()   
+   #foto = forms.ImageField()   
 
    class Meta:
       model = Resenas
-      fields = ['nombre_producto', 'titulo', 'categoria', 'descripcion', 'foto']
+      fields = ['nombre_producto', 'titulo', 'categoria', 'descripcion'] #le saque foto
    
    def clean_nombre_producto(self):
       field = self.cleaned_data.get("nombre_producto")

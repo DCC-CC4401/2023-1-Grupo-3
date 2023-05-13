@@ -27,7 +27,8 @@ from resenas import views as views_r
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login', views.login, name = 'login'),
+    #modifiqué el metodo al cual llama la vista
+    path('login', views.ingreso, name = 'login'),
     path('register', views.register, name = 'register'),
     path('nueva_resena', views_r.nueva_resena, name = 'nueva_resena'),
 ]
