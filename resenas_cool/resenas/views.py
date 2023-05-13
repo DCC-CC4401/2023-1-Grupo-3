@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from resenas.forms import NuevaResenaModelForm
 from resenas.models import Resenas, Categorias
 from usuarios.models import Usuario
+from django.contrib import messages
+from django.http import HttpResponseRedirect
+
 
 
 def nueva_resena(request):
@@ -49,28 +52,41 @@ def mostrar_resena(request, review_id):
 
 
 def borrar(request, review_id):
-   review = Resenas.objects.get(id=review_id)
-   review.delete()
-   return redirect('nueva_resena')
+   resena = Resenas.objects.get(id=review_id)
+   if(request.user != resena.id_usuario):
+      return redirect("nueva_resena")
+   
+   else:
+      review = Resenas.objects.get(id=review_id)
+      review.delete()
+      return redirect('nueva_resena')
 
 def modificar_resena(request, review_id):
+
    resena = Resenas.objects.get(id=review_id)
 
-   categorias =Categorias.objects.all()
+   if(request.user != resena.id_usuario):
+      return redirect("nueva_resena")
    
-   if request.method == "GET":
-      return render(request, "../templates/mod_resena.html", {"resena": resena, "categorias":categorias})
-   
-   elif request.method == "POST":
-      resena.nombre_producto = request.POST["nombre_producto"]
-      resena.titulo = request.POST["titulo"] 
-      nombre_categoria = request.POST["selector_categoria"]  
-      resena.id_categoria = Categorias.objects.get(nombre=nombre_categoria)
-      resena.descripcion = request.POST["descripcion"]
+
+   else:
+
+      # resena_ognl = resena
+      categorias = Categorias.objects.all()
+
+      if request.method == 'POST':
+         form = NuevaResenaModelForm(request.POST, instance=resena)
+         if form.is_valid():
+               form.save()
+         return redirect('mostrar_resena', review_id=review_id)
       
-      resena.save()
-      return redirect('mostrar_resena', review_id=review_id)
-   
+      else:
+         form = NuevaResenaModelForm(instance=resena)
+
+      return render(request, '../templates/nueva_resena.html', {'form': form, 'resena':resena, 'categorias':categorias})
+
+# def cancelar(request, review_id):
+#    redirect('mostrar_resena', review_id=review_id)
 
 
 

@@ -42,7 +42,7 @@
                     
                 {% if resena.id_usuario.id == user.id %}
                 <div class="col col-lg-1">
-                <form action="#" method="POST">
+                <form action="{% url 'borrar' resena.id %}" method="POST">
                     {% csrf_token %}
                     <input class="btn btn-secondary" type="submit" value = 'Borrar'>
                 </form>
