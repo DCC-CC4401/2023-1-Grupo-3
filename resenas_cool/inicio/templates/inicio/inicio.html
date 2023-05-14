@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="botonlogin">
+        <button class="btn-dark" onclick=""> Log in </button>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand navbar-dark bg-dark text-white"> Reseñas</a>
+        <div class="container">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    {% for elemento in categorias %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{elemento}}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            {% for resena in resenas %}
+            <div class="col-md-8">
+                <a class="card-title">{{resena.titulo}}</a>
+                <br>
+                <!-- </img class="img-thumbnail" src="{{resena.foto}}"> -->
+                <a class="text-body descrip"> {{resena.descripcion}}</a>
+                <br>
+                <a class="text-black-50">{{resena.id_usuario}}</a>
+                <br>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>
