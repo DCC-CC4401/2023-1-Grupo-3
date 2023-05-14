@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from resenas.models import Resena
+from resenas.models import Resena, Categorias
 
 
 def ver_resenas(request):
     if request.method == 'GET':
-        return render(request, 'ver_resenas.html', {"resenas": Resena.objects.all()})
+        return render(request, 'ver_resenas.html', {"categorias": Categorias.objects.all(), "resenas": Resena.objects.all()})
