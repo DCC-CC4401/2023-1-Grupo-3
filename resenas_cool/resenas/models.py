@@ -22,7 +22,7 @@ class Resenas(models.Model):
     id_categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE)
     id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
-    foto = models.ImageField()
+    #foto = models.ImageField()
 
     def __str__(self):
         return self.titulo  # name to be shown when called

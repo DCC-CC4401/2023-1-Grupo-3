@@ -27,7 +27,12 @@ from resenas import views as views_r
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login', views.login, name = 'login'),
+    #modifiqué el metodo al cual llama la vista
+    path('login', views.ingreso, name = 'login'),
     path('register', views.register, name = 'register'),
     path('nueva_resena', views_r.nueva_resena, name = 'nueva_resena'),
+    path('mostrar_resena/<int:review_id>/', views_r.mostrar_resena, name = 'mostrar_resena'),
+    path('borrar/<int:review_id>/', views_r.borrar, name = 'borrar'),
+    path('modificar_resena/<int:review_id>/', views_r.modificar_resena, name = 'modificar_resena'),
+    #path('cancelar/<int:review_id>/', views_r.cancelar, name = 'cancelar'),
 ]
