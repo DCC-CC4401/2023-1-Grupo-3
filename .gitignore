@@ -240,4 +240,4 @@ resenas_cool/usuarios/__pycache__/apps.cpython-310.pyc
 resenas_cool/usuarios/__pycache__/models.cpython-310.pyc
 
 # BASE DE DATOS
-db.sqlite3
+resenas_cool/db.sqlite3
