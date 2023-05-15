@@ -34,7 +34,7 @@ def ingreso(request):
         if user is not None:   
             login(request,user) #método para que se quede "logeado"
             print("Usuario encontrado")
-            return HttpResponseRedirect("nueva_resena")
+            return HttpResponseRedirect("ver_resenas")
         else:
             messages.error(request, "Usuario o contraseña incorrectos")
             return HttpResponseRedirect("login")

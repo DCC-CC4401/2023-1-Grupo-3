@@ -24,6 +24,9 @@ from django.contrib import admin
 from django.urls import path
 from usuarios import views
 from resenas import views as views_r
+from inicio import views as views_i
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,5 +37,10 @@ urlpatterns = [
     path('mostrar_resena/<int:review_id>/', views_r.mostrar_resena, name = 'mostrar_resena'),
     path('borrar/<int:review_id>/', views_r.borrar, name = 'borrar'),
     path('modificar_resena/<int:review_id>/', views_r.modificar_resena, name = 'modificar_resena'),
+    path('', views_i.ver_resenas, name = 'ver_resenas'),
+    path('ver_resenas', views_i.ver_resenas, name = 'ver_resenas')
     #path('cancelar/<int:review_id>/', views_r.cancelar, name = 'cancelar'),
 ]
+
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

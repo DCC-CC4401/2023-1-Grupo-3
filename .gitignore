@@ -238,3 +238,10 @@ resenas_cool/usuarios/__pycache__/__init__.cpython-310.pyc
 resenas_cool/usuarios/__pycache__/admin.cpython-310.pyc
 resenas_cool/usuarios/__pycache__/apps.cpython-310.pyc
 resenas_cool/usuarios/__pycache__/models.cpython-310.pyc
+
+# BASE DE DATOS
+resenas_cool/db.sqlite3
+
+# Imagenes
+*/media
+

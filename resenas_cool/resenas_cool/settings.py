@@ -14,6 +14,9 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+MEDIA_ROOT = 'media'
+MEDIA_URL = ''
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -38,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'usuarios',
-    'resenas'
+    'resenas',
+    'inicio'
 ]
 
 MIDDLEWARE = [
