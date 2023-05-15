@@ -11,7 +11,7 @@ def nueva_resena(request):
   
   if request.user.is_authenticated:
    form_resena = NuevaResenaModelForm()
-   categorias =Categorias.objects.all()
+   categorias = Categorias.objects.all()
    
    if request.method == "GET":
       print(request.user)

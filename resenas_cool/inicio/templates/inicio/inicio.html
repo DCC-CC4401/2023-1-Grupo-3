@@ -9,8 +9,12 @@
 
 </head>
 <body>
-    <div class="botonlogin">
-        <button class="btn-dark" onclick=""> Log in </button>
+    <div class="d-flex justify-content-end">
+        {% if logged_in %}
+        <a class="btn btn-dark login" href="#"> {{user.id_usuario}} </a>
+        {% else %}
+        <a class="btn btn-dark login" href="/login"> Log in </a>
+        {% endif %}
     </div>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -31,13 +35,13 @@
     <div class="container">
         <div class="row">
             {% for resena in resenas %}
-            <div class="col-md-8">
+            <div class="col-md">
                 <a class="card-title">{{resena.titulo}}</a>
                 <br>
                 <!-- </img class="img-thumbnail" src="{{resena.foto}}"> -->
                 <a class="text-body descrip"> {{resena.descripcion}}</a>
                 <br>
-                <a class="text-black-50">{{resena.id_usuario}}</a>
+                <a class="text-black-50">@{{resena.id_usuario}}</a>
                 <br>
             </div>
             {% endfor %}
