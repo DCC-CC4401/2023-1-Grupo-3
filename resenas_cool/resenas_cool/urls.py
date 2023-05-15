@@ -37,7 +37,8 @@ urlpatterns = [
     path('mostrar_resena/<int:review_id>/', views_r.mostrar_resena, name = 'mostrar_resena'),
     path('borrar/<int:review_id>/', views_r.borrar, name = 'borrar'),
     path('modificar_resena/<int:review_id>/', views_r.modificar_resena, name = 'modificar_resena'),
-    path('', views_i.ver_resenas, name = 'ver_resenas')
+    path('', views_i.ver_resenas, name = 'ver_resenas'),
+    path('ver_resenas', views_i.ver_resenas, name = 'ver_resenas')
     #path('cancelar/<int:review_id>/', views_r.cancelar, name = 'cancelar'),
 ]
 

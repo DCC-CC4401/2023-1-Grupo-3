@@ -29,7 +29,7 @@ def nueva_resena(request):
          nombre_categoria = request.POST["selector_categoria"]  
          categoria = Categorias.objects.get(nombre=nombre_categoria)
          descripcion = request.POST["descripcion"]
-         foto = request.POST["foto"]
+         foto = request.FILES["foto"]
          
          nueva_resena = Resenas(nombre_producto=nombre_producto, titulo=titulo, descripcion=descripcion, id_categoria=categoria, id_usuario=request.user, foto=foto)
          # if nueva_resena.is_valid():

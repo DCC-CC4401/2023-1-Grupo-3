@@ -6,7 +6,7 @@ class NuevaResenaModelForm(forms.ModelForm):
    titulo = forms.CharField(label="Título de la Reseña")
    categoria = forms.ModelChoiceField(queryset=Categorias.objects.all())
    descripcion = forms.CharField(widget=forms.Textarea()) 
-   foto = forms.ImageField()   
+   foto = forms.ImageField( required=True)   
 
    class Meta:
       model = Resenas
