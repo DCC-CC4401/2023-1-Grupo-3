@@ -25,6 +25,8 @@ from django.urls import path
 from usuarios import views
 from resenas import views as views_r
 from inicio import views as views_i
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -38,3 +40,6 @@ urlpatterns = [
     path('', views_i.ver_resenas, name = 'ver_resenas')
     #path('cancelar/<int:review_id>/', views_r.cancelar, name = 'cancelar'),
 ]
+
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
