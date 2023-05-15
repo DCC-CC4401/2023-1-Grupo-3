@@ -4,7 +4,7 @@ from usuarios.models import Usuario
 
 class Categorias(models.Model):
     id = models.AutoField(primary_key=True)  
-    nombre = models.CharField(max_length=25)
+    nombre = models.CharField(max_length=25, unique=True)
     
     #categoria = models.ForeignKey(Categoria, default="general", on_delete=models.CASCADE)  # la llave foránea
 
