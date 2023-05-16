@@ -48,4 +48,4 @@ def register(request):
             return HttpResponseRedirect("register") # Nos quedamos donde mismo
         # Creamos el usuario en la BD
         usuario = Usuario.objects.create_user(username=username, password=password)
-        return HttpResponseRedirect("register")    # Redireccionamos a register, nos quedamos donde mismo
+        return HttpResponseRedirect("login")    # Redireccionamos a register, nos quedamos donde mismo
