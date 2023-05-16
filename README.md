@@ -1,6 +1,6 @@
 # Reseñas Cool con Django
 ### 2023-1-Grupo-3
-#### Pedro Astaburuaga - Valeria Gutiérrez - Kathleen Kohler - Demian Rojas - Cristóbal Suazo
+#### Pedro Astaburuaga - Valeria Gutiérrez - Kathleen Kohler - Demian Hott - Cristóbal Suazo
 
 Reseñas Cool es una aplicación web desarrollada con Django que permite a los usuarios crear, ver, modificar, puntuar y borrar reseñas de productos. Además, incluye un sistema de autenticación para permitir a los usuarios crear y gestionar sus propias reseñas, así como ver las reseñas de otros usuarios.
 

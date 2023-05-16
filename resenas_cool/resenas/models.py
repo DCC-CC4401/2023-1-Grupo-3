@@ -2,17 +2,18 @@ from django.db import models
 from django.utils import timezone
 from usuarios.models import Usuario
 
+# Creamos clase categoría
 class Categorias(models.Model):
+    # No pueden existir 2 categorías con el mismo nombre
     id = models.AutoField(primary_key=True)  
     nombre = models.CharField(max_length=25, unique=True)
     
-    #categoria = models.ForeignKey(Categoria, default="general", on_delete=models.CASCADE)  # la llave foránea
-
     def __str__(self):
         return self.nombre # name to be shown when called
     
-
+# Creamos clase reseñas
 class Resenas(models.Model):
+    # Se crean los campos del modelo para crear una nueva reseña
     id = models.AutoField(primary_key=True)
     nombre_producto = models.CharField(max_length=25)
     fecha_creación = models.DateField(default=timezone.now().strftime("%Y-%m-%d"))

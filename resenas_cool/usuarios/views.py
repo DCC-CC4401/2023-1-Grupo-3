@@ -5,52 +5,47 @@ from usuarios.login import LoginForm
 from usuarios.register import RegisterForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import AuthenticationForm #add this
+from django.contrib.auth.forms import AuthenticationForm
 
-
-#cambiamos el nombre del metodo a ingreso, para que no haya ambiguedad con el login dentro
-#del metodo
+# Definimos la función de ingreso para no confundir con login
 def ingreso(request):
     credenciales = Usuario.objects.all()
 
-    if request.method == "GET":
+    if request.method == "GET": # Si se ingresa a la página antes de rellenar los datos
+        # Render a la página con el formulario de login
         return render(request, "usuarios/login.html", {"credenciales": credenciales, "form_login": LoginForm()})
     
-    if request.method == "POST":
-        #form = AuthenticationForm(request, data=request.POST)
-        #if form.is_valid():
-        #    username = form.cleaned_data.get('username')
-        #    password = form.cleaned_data.get('password')
-        #    user = authenticate(username=username, password=password)
-        #    if user is not None:
-        #        login(request, user)
-        #        messages.info(request, f"You are now logged in as {username}.")
-        #        return redirect("main:homepage")
-        #    else:
-        #        messages.error(request,"Invalid username or password.")
+    if request.method == "POST": # Si se ingresa luego de apretado el botón
+        # Obtenemos las credenciales ingresadas
         username = request.POST["nombre"]
         password = request.POST["contraseña"]
-        user = authenticate(username=username, password=password) #busca al usuario en la BD
-        if user is not None:   
-            login(request,user) #método para que se quede "logeado"
-            print("Usuario encontrado")
-            return HttpResponseRedirect("ver_resenas")
-        else:
-            messages.error(request, "Usuario o contraseña incorrectos")
-            return HttpResponseRedirect("login")
+        user = authenticate(username=username, password=password) # Busca al usuario en la BD
+        # Si encuentra al usuario
+        if user is not None:
+            login(request,user) # Método para que se quede "logeado"
+            return HttpResponseRedirect("ver_resenas") # Redireccionamos a ver_resenas
+        else:   # Si no lo encuentra
+            messages.error(request, "Usuario o contraseña incorrectos") # Mostramos mensaje de error
+            return HttpResponseRedirect("login")    # Redireccionamos a login, nos quedamos donde mismo
     
+# Definimos funcion para registrarse
 def register(request):
     credenciales = Usuario.objects.all()
-    if request.method == "GET":
+
+    if request.method == "GET": # Si se ingresa a la página antes de rellenar los datos
+        # Render a la página con el formulario de register
         return render(request, "usuarios/register.html", {"credenciales": credenciales, "form_register": RegisterForm()})
-    if request.method == "POST":
+
+    if request.method == "POST": # Si se ingresa luego de apretado el botón
+        # Obtenemos las credenciales ingresadas
         username = request.POST["nombre"]
         password = request.POST["contraseña"]
 
         # Checkeo de largo
         if len(username) < 5:
+            # Mostramos mensaje de error
             messages.error(request, "Nombre de usuario demasiado corto, debe ser a lo menos 5")
-            return HttpResponseRedirect("login")
-        #cambiamos el metodo a create_user
+            return HttpResponseRedirect("register") # Nos quedamos donde mismo
+        # Creamos el usuario en la BD
         usuario = Usuario.objects.create_user(username=username, password=password)
-        return HttpResponseRedirect("login")    
+        return HttpResponseRedirect("register")    # Redireccionamos a register, nos quedamos donde mismo
