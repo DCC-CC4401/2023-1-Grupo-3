@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from resenas.forms import NuevaResenaModelForm
-from resenas.models import Resenas, Categorias
+from resenas.models import Resenas, Categorias, Valoracion
 from usuarios.models import Usuario
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -42,8 +42,10 @@ def mostrar_resena(request, review_id):
     resena = Resenas.objects.get(id=review_id)
     # Obtenemos el usuario
     user = request.user
+    # Obtenemos la cantidad de resenas
+    cant_val = Valoracion.objects.filter(id_res=review_id).count()
     # Render al template con resena y usuario
-    return render(request, '../templates/mostrar_resena.html', {"resena": resena, "user": user})
+    return render(request, '../templates/mostrar_resena.html', {"resena": resena, "user": user, "val": cant_val})
 
 # Definimos la función de borrar reseña
 def borrar(request, review_id):

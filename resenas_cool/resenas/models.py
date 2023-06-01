@@ -27,3 +27,12 @@ class Resenas(models.Model):
 
     def __str__(self):
         return self.titulo  # name to be shown when called
+
+# Creamos clase valoracion
+class Valoracion(models.Model):
+    # id
+    id = models.AutoField(primary_key=True)
+    # id reseña
+    id_res = models.ForeignKey(Resenas, on_delete=models.CASCADE)
+    # id usuario
+    id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
