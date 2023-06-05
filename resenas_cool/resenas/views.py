@@ -60,7 +60,7 @@ def borrar(request, review_id):
         # La borramos
         review.delete()
         # Redireccionamos a nueva_reseña
-        return redirect('nueva_resena')
+        return redirect('ver_resenas')
 
 # Definimos la función de modificar reseña
 def modificar_resena(request, review_id):
@@ -81,6 +81,7 @@ def modificar_resena(request, review_id):
             nombre_categoria = request.POST["selector_categoria"]
             nueva_categoria = Categorias.objects.get(nombre=nombre_categoria)
             nueva_descripcion = request.POST.get('descrpcion')
+            nueva_foto = request.FILES['foto']
 
             # Actualizar los campos de la instancia de la reseña
             resena.nombre_producto = nuevo_nombre_producto if nuevo_nombre_producto is not None else resena.nombre_producto 
@@ -88,6 +89,7 @@ def modificar_resena(request, review_id):
             resena.titulo = nuevo_titulo if nuevo_titulo is not None else resena.titulo
             resena.id_categoria = nueva_categoria if nueva_categoria is not None else resena.id_categoria
             resena.descripcion = nueva_descripcion if nueva_descripcion is not None else resena.descripcion
+            resena.foto = nueva_foto if nueva_foto is not None else resena.foto
 
             # Guardar los cambios en la base de datos
             resena.save()
@@ -100,5 +102,3 @@ def modificar_resena(request, review_id):
         # Render de nueva reseña con sus parámetros correspondientes
         return render(request, '../templates/mod_resena.html', {'form': form, 'resena': resena, 'categorias': categorias})
 
-# def cancelar(request, review_id):
-#    redirect('mostrar_resena', review_id=review_id)

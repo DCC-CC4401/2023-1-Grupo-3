@@ -37,16 +37,62 @@
                     <label for="descripcion">Descripción</label>
                     <textarea  id="descripcion" name ="descripcion" class="form-control" required>{{resena.descripcion}}</textarea>
                 </div>
-                <!-- <div>
-                    <label for="foto">Foto</label>
-                    <input type="file" name="foto" id="foto" accept="image/*,.pdf" required>
-                  </div> -->
-              <!-- Fin formulario de nueva tarea -->
-              <div style="display: flex; justify-content: start;">
-                
-                
-                <input type="submit" value="Submit">
+
+                <div>
+                  {% if resena.foto %}
+                  <img src="{{ resena.foto.url }}" alt="Foto actual" class="foto-actual">
+                  <br>
+                  
+                  <div class="row">
+                    <div>
+                    <a class="btn btn-secondary" href="#" id="cambiar_foto">Cambiar foto</a>
+                    <br>
+                    {% endif %}
+                    <br>
+                    </div>
+                    <br>
+                    
+                    <div>
+                      <div id="campo_foto" style="display: none;">
+                        <input type="file" name="foto" id="nueva_foto">
+                        <br>
+                      </div>
+                </div>
               </div>
+              </div>
+
+                <script>
+                  window.addEventListener('DOMContentLoaded', function() {
+                    const cambiarFotoLink = document.getElementById('cambiar_foto');
+                    const campoFoto = document.getElementById('campo_foto');
+                
+                    cambiarFotoLink.addEventListener('click', function(event) {
+                      event.preventDefault();
+                      campoFoto.style.display = 'block';
+                    });
+                  });
+                </script>
+
+                <style>
+                  .foto-actual {
+                    max-width: 300px;
+                    max-height: 300px;
+                  }
+                </style>
+
+              <!-- Fin formulario de nueva tarea -->
+              <div class="row">
+                <div class="col col-lg-1">
+                <input class="btn btn-primary" type="submit" value="Guardar">
+                </div>
+
+                <div class="col col-lg-1">
+                  <button type="button" onclick="window.history.go(-1);" class="btn btn-primary">Cancelar</button>
+                </div>
+              </div>
+
+
+
               
               <!-- Fin botones para agregar o eliminar tarea -->
             </form>
