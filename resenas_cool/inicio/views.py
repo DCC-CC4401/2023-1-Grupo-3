@@ -8,11 +8,8 @@ def ver_resenas(request):
         resenas = Resenas.objects.all()
         valoraciones = Valoracion.objects.all()
         # Calculamos la cantidad de likes de cada uno
-        r_v = [0] * len(resenas)
         for i in resenas:
-            for j in valoraciones:
-                if i.id == j.id_res.id:
-                    r_v[i.id] += 1
+            i.likes = Valoracion.objects.filter(id_res=i.id).count()
         # Le pasamos para completar su usuario, categorias para llenar la navbar y resenas para que obtenga de la BD
-        return render(request, 'inicio/inicio.html', {"user": request.user ,"categorias": Categorias.objects.all(), "resenas": resenas, "r_v": r_v})
+        return render(request, 'inicio/inicio.html', {"user": request.user ,"categorias": Categorias.objects.all(), "resenas": resenas})
         

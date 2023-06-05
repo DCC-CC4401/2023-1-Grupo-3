@@ -23,6 +23,8 @@ class Resenas(models.Model):
     id_categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE)
     id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
+    likes = models.IntegerField(default=0)
+
     foto = models.ImageField(upload_to='media/images/resenas',  blank=True, null=True)
 
     def __str__(self):
