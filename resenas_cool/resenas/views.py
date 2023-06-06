@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from resenas.forms import NuevaResenaModelForm
-from resenas.models import Resenas, Categorias
+from resenas.models import Resenas, Categorias, Valoracion
 from usuarios.models import Usuario
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -42,6 +42,16 @@ def mostrar_resena(request, review_id):
     resena = Resenas.objects.get(id=review_id)
     # Obtenemos el usuario
     user = request.user
+    # Obtenemos la cantidad de resenas
+    resena.likes = Valoracion.objects.filter(id_res=review_id).count()
+    # Botón
+    if request.method == 'POST':
+        # Vemos si el usuario ya dio like
+        if Valoracion.objects.filter(id_usuario=user, id_res=resena).count() == 0:
+            nueva_valoracion = Valoracion(id_usuario=user, id_res=resena)
+            nueva_valoracion.save()
+            resena.likes = Valoracion.objects.filter(id_res=review_id).count()
+            return render(request, '../templates/mostrar_resena.html', {"resena": resena, "user": user})
     # Render al template con resena y usuario
     return render(request, '../templates/mostrar_resena.html', {"resena": resena, "user": user})
 
