@@ -71,6 +71,9 @@
                             <a class="card-text"> {{resena.descripcion}}</a>
                             <br>
                             <a class="text-black-50">@{{resena.id_usuario}}</a>
+                            <form action="mostrar_resena/{{resena.id}}/" method="get">
+                                <button class="btn btn-primary">Ver Más</button>
+                            </form>
                         </li>
                     </ul>
                 </div>
@@ -97,5 +100,4 @@
         crossorigin="anonymous"></script>
 
 </body>
-
 </html>
