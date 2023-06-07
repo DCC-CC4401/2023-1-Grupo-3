@@ -1,8 +1,8 @@
 from django import forms
-from models import Comentario
+from comentarios.models import Comentario
 
 class NuevoComentarioModelForm(forms.ModelForm):
-    descripcion = forms.ChardField(widget=forms.Textarea())
+    descripcion = forms.CharField(widget=forms.Textarea())
 
     class Meta:
         model = Comentario
