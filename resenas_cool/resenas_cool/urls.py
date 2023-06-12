@@ -19,12 +19,14 @@ import os
 
 sys.path.append(os.path.join(os.path.dirname('views.py'), 'usuarios'))
 sys.path.append(os.path.join(os.path.dirname('views.py'), 'resenas'))
+sys.path.append(os.path.join(os.path.dirname('views.py'), 'comentarios'))
 
 from django.contrib import admin
 from django.urls import path
 from usuarios import views
 from resenas import views as views_r
 from inicio import views as views_i
+from comentarios import views as views_c
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -39,6 +41,7 @@ urlpatterns = [
     path('modificar_resena/<int:review_id>/', views_r.modificar_resena, name = 'modificar_resena'),
     path('', views_i.ver_resenas, name = 'ver_resenas'),
     path('ver_resenas', views_i.ver_resenas, name = 'ver_resenas'),
+    path('nuevo_comentario/<int:review_id>/', views_c.nuevo_comentario, name = 'nuevo_comentario')
 ]
 
 
