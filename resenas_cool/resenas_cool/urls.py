@@ -42,7 +42,6 @@ urlpatterns = [
     path('', views_i.ver_resenas, name = 'ver_resenas'),
     path('ver_resenas', views_i.ver_resenas, name = 'ver_resenas'),
     path('nuevo_comentario/<int:review_id>/', views_c.nuevo_comentario, name = 'nuevo_comentario')
-    #path('cancelar/<int:review_id>/', views_r.cancelar, name = 'cancelar'),
 ]
 
 
