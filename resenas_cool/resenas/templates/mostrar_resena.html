@@ -52,12 +52,14 @@
                 <form action="{% url 'modificar_resena' resena.id %}" method="GET">
                     <button class="btn btn-primary" type="submit">Modificar</button>
                 </form>
-            </div>
+                </div>                
         </div>
         {% endif %}
-                
-              
-
+        <div>
+            <form action="{% url 'nuevo_comentario' resena.id %}" method="GET">
+                <button class="btn btn-primary" type="submit">Agregar comentario</button>
+            </form>
+        </div>
          
       </div><!-- container -->
       {% endblock %}

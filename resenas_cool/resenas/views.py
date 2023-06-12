@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from resenas.forms import NuevaResenaModelForm
 from resenas.models import Resenas, Categorias
+from comentarios.models import Comentario
 from usuarios.models import Usuario
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -42,8 +43,13 @@ def mostrar_resena(request, review_id):
     resena = Resenas.objects.get(id=review_id)
     # Obtenemos el usuario
     user = request.user
+    #obtenemos los comentarios
+    #queryset = Comentario.objects.get(id_resena=review_id)
+    #allcomentarios = queryset.all()
+    #print(allcomentarios)
     # Render al template con resena y usuario
     return render(request, '../templates/mostrar_resena.html', {"resena": resena, "user": user})
+
 
 # Definimos la función de borrar reseña
 def borrar(request, review_id):
@@ -61,6 +67,7 @@ def borrar(request, review_id):
         review.delete()
         # Redireccionamos a nueva_reseña
         return redirect('nueva_resena')
+
 
 # Definimos la función de modificar reseña
 def modificar_resena(request, review_id):
@@ -86,6 +93,7 @@ def modificar_resena(request, review_id):
             form = NuevaResenaModelForm(instance=resena)
         # Render de nueva reseña con sus parámetros correspondientes
         return render(request, '../templates/nueva_resena.html', {'form': form, 'resena': resena, 'categorias': categorias})
+
 
 # def cancelar(request, review_id):
 #    redirect('mostrar_resena', review_id=review_id)

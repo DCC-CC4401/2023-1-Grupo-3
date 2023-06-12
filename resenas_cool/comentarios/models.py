@@ -11,4 +11,4 @@ class Comentario(models.Model):
     descripcion = models.TextField(blank=True)
 
     def __str__(self):
-        return self.id
+        return self.id 
