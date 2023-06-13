@@ -87,7 +87,7 @@ def modificar_resena(request, review_id):
             nuevo_titulo = request.POST.get('titulo')
             nombre_categoria = request.POST["selector_categoria"]
             nueva_categoria = Categorias.objects.get(nombre=nombre_categoria)
-            nueva_descripcion = request.POST.get('descrpcion')
+            nueva_descripcion = request.POST.get('descripcion')
             nueva_foto = request.FILES.get('foto')
 
             # Actualizar los campos de la instancia de la reseña

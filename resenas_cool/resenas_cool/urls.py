@@ -41,8 +41,11 @@ urlpatterns = [
     path('modificar_resena/<int:review_id>/', views_r.modificar_resena, name = 'modificar_resena'),
     path('', views_i.ver_resenas, name = 'ver_resenas'),
     path('ver_resenas', views_i.ver_resenas, name = 'ver_resenas'),
-    path('nuevo_comentario/<int:review_id>/', views_c.nuevo_comentario, name = 'nuevo_comentario')
+    path('nuevo_comentario/<int:review_id>/', views_c.nuevo_comentario, name = 'nuevo_comentario'),
+    path('modificar_comentario/<int:comment_id>/', views_c.modificar_comentario, name = 'modificar_comentario'),
+
 ]
+
 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
