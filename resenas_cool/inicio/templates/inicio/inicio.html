@@ -38,12 +38,14 @@
                         {% endif %}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        {% if categoria %}
-                        <a class="dropdown-item" href="{% url 'ver_resenas'%}">Quitar Filtro</a>
-                        {% endif %}
                         {% for elemento in categorias %}
                         <a class="dropdown-item" href="{% url 'ver_resenas' categoria=elemento %}">{{elemento}}</a>
                         {% endfor %}
+                        <div class="dropdown-divider"></div>
+                        {% if categoria %}
+                        <a class="dropdown-item" href="{% url 'ver_resenas'%}"><span class="material-icons">close</span> <span
+                                class="align-top">Quitar Filtro</span></a>
+                        {% endif %}
                     </div>
                 </li>
 
