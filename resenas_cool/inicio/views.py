@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from resenas.models import Resenas, Categorias
+from resenas.models import Resenas, Categorias, Valoracion
 from usuarios.models import Usuario
 from django.contrib.auth import logout
 
@@ -26,6 +26,10 @@ def ver_resenas(request, categoria=None, usuario=None):
                 error = "Usuario no encontrado"
                 resenas = []
 
+        valoraciones = Valoracion.objects.all()
+        # Calculamos la cantidad de likes de cada uno
+        for i in resenas:
+            i.likes = Valoracion.objects.filter(id_res=i.id).count()
         # Le pasamos para completar su usuario, categorias para llenar la navbar y resenas para que obtenga de la BD
         return render(request, 'inicio/inicio.html', {"user": request.user, "categorias": Categorias.objects.all(), "resenas": resenas, "categoria": categoria, "usuario": usuario, "error": error})
 
