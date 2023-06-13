@@ -46,7 +46,8 @@ urlpatterns = [
          views_i.ver_resenas, name='ver_resenas'),
     path('ver_resenas/usr=<str:usuario>',
          views_i.ver_resenas, name='ver_resenas'),
-    path('ver_resenas', views_i.ver_resenas, name='ver_resenas')
+    path('ver_resenas', views_i.ver_resenas, name='ver_resenas'),
+    path('logout', views_i.logout_view, name='logout')
     # path('cancelar/<int:review_id>/', views_r.cancelar, name = 'cancelar'),
 ]
 

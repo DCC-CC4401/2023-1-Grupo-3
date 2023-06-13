@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from resenas.models import Resenas, Categorias
 from usuarios.models import Usuario
+from django.contrib.auth import logout
 
 
 # Definimos funcion para mostrar las reseñas
@@ -25,3 +26,7 @@ def ver_resenas(request, categoria=None, usuario=None):
 
         # Le pasamos para completar su usuario, categorias para llenar la navbar y resenas para que obtenga de la BD
         return render(request, 'inicio/inicio.html', {"user": request.user, "categorias": Categorias.objects.all(), "resenas": resenas})
+
+def logout_view(request):
+    logout(request)
+    return redirect('ver_resenas')
