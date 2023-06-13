@@ -25,17 +25,17 @@ def nuevo_comentario(request, review_id):
         return redirect('inicio')    # Redireccionamos donde mismo
     
 
-def borrar_comentario(request, id, id_resena):
-  comentario = Comentario.objects.get(id=id)
+def borrar_comentario(request, comment_id):
+  comentario = Comentario.objects.get(id=comment_id)
   if (request.user != comentario.id_usuario):
         # Redireccionamos a nueva_resena
-        return redirect("mostrar_resena",review_id = id_resena)
+        return redirect("mostrar_resena", review_id = comentario.id_resena.id)
     # Si el usuario es el que hizo la reseña
   else:
       # La borramos
       comentario.delete()
       # Redireccionamos a nueva_reseña
-      return redirect("mostrar_resena",review_id = id_resena)
+      return redirect("mostrar_resena",review_id = comentario.id_resena.id)
   
 # Definimos la función de modificar comentario
 def modificar_comentario(request, comment_id):
