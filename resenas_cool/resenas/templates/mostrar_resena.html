@@ -41,7 +41,20 @@
                     <label for="descripcion">Descripción</label>
                     <textarea  id="descripcion" class="form-control"   required readonly>{{resena.descripcion}}</textarea>  
                 </div>
-                
+                <div>
+                    {% if resena.foto %}
+                    <img src="{{ resena.foto.url }}" alt="Foto actual" class="foto-actual">
+                    <br>
+                    {% endif %}
+                    <br>
+                  </div>
+
+                  <style>
+                    .foto-actual {
+                      max-width: 300px;
+                      max-height: 300px;
+                    }
+                  </style>
 
                 <div class="row">
                 <div class="col col-lg-1">
@@ -62,12 +75,14 @@
                 <form action="{% url 'modificar_resena' resena.id %}" method="GET">
                     <button class="btn btn-primary" type="submit">Modificar</button>
                 </form>
-            </div>
+                </div>                
         </div>
         {% endif %}
-                
-              
-
+        <div>
+            <form action="{% url 'nuevo_comentario' resena.id %}" method="GET">
+                <button class="btn btn-primary" type="submit">Agregar comentario</button>
+            </form>
+        </div>
          
       </div><!-- container -->
       {% endblock %}
