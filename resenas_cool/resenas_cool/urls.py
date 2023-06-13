@@ -14,12 +14,20 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
+from inicio import views as views_i
+from resenas import views as views_r
+from usuarios import views
+from django.urls import path
+from django.contrib import admin
 import sys
 import os
 
 sys.path.append(os.path.join(os.path.dirname('views.py'), 'usuarios'))
 sys.path.append(os.path.join(os.path.dirname('views.py'), 'resenas'))
 sys.path.append(os.path.join(os.path.dirname('views.py'), 'comentarios'))
+
 
 from django.contrib import admin
 from django.urls import path
@@ -41,12 +49,15 @@ urlpatterns = [
     path('modificar_resena/<int:review_id>/', views_r.modificar_resena, name = 'modificar_resena'),
     path('', views_i.ver_resenas, name = 'ver_resenas'),
     path('ver_resenas', views_i.ver_resenas, name = 'ver_resenas'),
+    path('ver_resenas/cat=<str:categoria>/usr=<str:usuario>', views_i.ver_resenas, name='ver_resenas'),
+    path('ver_resenas/cat=<str:categoria>', views_i.ver_resenas, name='ver_resenas'),
+    path('ver_resenas/usr=<str:usuario>', views_i.ver_resenas, name='ver_resenas'),
     path('nuevo_comentario/<int:review_id>/', views_c.nuevo_comentario, name = 'nuevo_comentario'),
     path('modificar_comentario/<int:comment_id>/', views_c.modificar_comentario, name = 'modificar_comentario'),
-    path('borrar_comentario/<int:comment_id>/', views_c.borrar_comentario, name = 'borrar_comentario'),
+    path('borrar_comentario/<int:comment_id>/', views_c.borrar_comentario, name = 'borrar_comentario')
 
 ]
 
 
-
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
