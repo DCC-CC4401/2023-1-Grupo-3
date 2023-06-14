@@ -12,21 +12,21 @@
           <!-- Encabezado de la página-->
           <h1>Modificar Reseña de {{resena.id_usuario}}</h1>
           <!-- Fin encabezado -->
-          <form action="" method="POST" enctype="multipart/form-data">
+          <form action="{% url 'modificar_resena' resena.id %}" method="POST" enctype="multipart/form-data">
               {% csrf_token %} <!-- csrf token for basic security -->
               <!-- Formulario de nueva tarea-->
               <div class="form-group">
                   <label for="nombre_producto">Nombre producto</label>
-                  <input type="text" id="nombre_producto" class="form-control" value="{{resena.nombre_producto}}" required>              
+                  <input type="text" id="nombre_producto" name ="nombre_producto" class="form-control" value="{{resena.nombre_producto}}" required>              
               </div>
               <div class="form-group">
                   <label for="titulo">Título</label>
-                  <input type="text" id="titulo" class="form-control" value="{{resena.titulo}}" required>              
+                  <input type="text" id="titulo" name ="titulo" class="form-control" value="{{resena.titulo}}" required>              
               </div>
               <div class="form-group">
                 <label for="categoria">Categoría</label>
                 <select id="categoria"  class="form-control" name="selector_categoria">
-                    <option class="disabled" value="">{{resena.id_categoria}}</option>
+                    <option class="disabled" value="{{resena.id_categoria}}">{{resena.id_categoria}}</option>
                     {% for categoria in categorias %}
                     <option class="" value="{{ categoria.nombre }}" name="{{ categoria.nombre }}">{{ categoria.nombre }}</option>
                     {% endfor %}
@@ -35,22 +35,64 @@
             
                 <div class="form-group">
                     <label for="descripcion">Descripción</label>
-                    <textarea  id="descripcion" class="form-control" required>{{resena.descripcion}}</textarea>
+                    <textarea  id="descripcion" name ="descripcion" class="form-control" required>{{resena.descripcion}}</textarea>
                 </div>
-                <!-- <div>
-                    <label for="foto">Foto</label>
-                    <input type="file" name="foto" id="foto" accept="image/*,.pdf" required>
-                  </div> -->
-              <!-- Fin formulario de nueva tarea -->
-              <!-- Botones para agregar o eliminar tarea -->
-              <div style="display: flex; justify-content: start;">
-                <!-- <form action="{% url 'cancelar' resena_orgnl.id %}" method="POST">
-                    {% csrf_token %}
-                  <button class="btn btn-primary" type="submit">Cancelar</button>
-                </form> -->
-                
-                <input type="submit" value="Submit">
+
+                <div>
+                  {% if resena.foto %}
+                  <img src="{{ resena.foto.url }}" alt="Foto actual" class="foto-actual">
+                  <br>
+                  
+                  <div class="row">
+                    <div>
+                    <a class="btn btn-secondary" href="#" id="cambiar_foto">Cambiar foto</a>
+                    <br>
+                    {% endif %}
+                    <br>
+                    </div>
+                    <br>
+                    
+                    <div>
+                      <div id="campo_foto" style="display: none;">
+                        <input type="file" name="foto" id="nueva_foto">
+                        <br>
+                      </div>
+                </div>
               </div>
+              </div>
+
+                <script>
+                  window.addEventListener('DOMContentLoaded', function() {
+                    const cambiarFotoLink = document.getElementById('cambiar_foto');
+                    const campoFoto = document.getElementById('campo_foto');
+                
+                    cambiarFotoLink.addEventListener('click', function(event) {
+                      event.preventDefault();
+                      campoFoto.style.display = 'block';
+                    });
+                  });
+                </script>
+
+                <style>
+                  .foto-actual {
+                    max-width: 300px;
+                    max-height: 300px;
+                  }
+                </style>
+
+              <!-- Fin formulario de nueva tarea -->
+              <div class="row">
+                <div class="col col-lg-1">
+                <input class="btn btn-primary" type="submit" value="Guardar">
+                </div>
+
+                <div class="col col-lg-1">
+                  <button type="button" onclick="window.history.go(-1);" class="btn btn-primary">Cancelar</button>
+                </div>
+              </div>
+
+
+
               
               <!-- Fin botones para agregar o eliminar tarea -->
             </form>
