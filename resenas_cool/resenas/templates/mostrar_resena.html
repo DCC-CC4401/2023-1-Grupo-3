@@ -79,17 +79,19 @@
         </div>
         {% endif %}
 
-        {% for comentario in autor_comentario %}
-        <div>
-            <label for="autor">Autor: {{comentario.0}}</label>
-            <label for="autor">Comentario: {{comentario.1}}</label>
-        </div>
-        {% endfor %}
+        <div class="container">
+            {% for comentario in autor_comentario %}
+            <div class="form-group">
+                <label for="autor">Autor: {{comentario.0}}</label>
+                <label for="autor">Comentario: {{comentario.1}}</label>
+            </div>
+            {% endfor %}
             
-        <div>
-            <form action="{% url 'nuevo_comentario' resena.id %}" method="GET">
-                <button class="btn btn-primary" type="submit">Agregar comentario</button>
-            </form>
+            <div>
+                <form action="{% url 'nuevo_comentario' resena.id %}" method="GET">
+                    <button class="btn btn-primary" type="submit">Agregar comentario</button>
+                </form>
+            </div>
         </div>
       </div><!-- container -->
       {% endblock %}

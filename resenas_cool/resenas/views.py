@@ -48,7 +48,7 @@ def mostrar_resena(request, review_id):
     resena.likes = Valoracion.objects.filter(id_res=review_id).count()
     liked = Valoracion.objects.filter(id_usuario=user, id_res=resena).count() != 0
     # Obtenemos los comentarios
-    comentarios = Comentario.objects.filter(id=review_id)
+    comentarios = Comentario.objects.filter(id_resena=review_id)
     # Creamos una tupla con autor y comentario
     autor_comentario = [(Usuario.objects.get(id=i.id_usuario_id), i.descripcion) for i in comentarios]
 
@@ -59,19 +59,13 @@ def mostrar_resena(request, review_id):
             nueva_valoracion = Valoracion(id_usuario=user, id_res=resena)
             nueva_valoracion.save()
             resena.likes = Valoracion.objects.filter(id_res=review_id).count()
-            return render(request, '../templates/mostrar_resena.html', {"resena": resena, "user": user, "liked": liked, "autor_comentario": autor_comentario})
         elif liked == True:
             val = Valoracion.objects.filter(id_usuario=user, id_res=resena)
             val.delete()
             liked = False
-            resena.likes = Valoracion.objects.filter(id_res=review_id).count()
-            return render(request, '../templates/mostrar_resena.html', {"resena": resena, "user": user, "liked": liked, "autor_comentario": autor_comentario})
-            
-        # Render al template con resena y usuario
-        return render(request, '../templates/mostrar_resena.html', {"resena": resena, "user": user, "liked": liked, "autor_comentario": autor_comentario})
-    else:
-        # Render al template con resena y usuario
-        return render(request, '../templates/mostrar_resena.html', {"resena": resena, "user": user, "liked": liked, "autor_comentario": autor_comentario})
+            resena.likes = Valoracion.objects.filter(id_res=review_id).count()   
+    # Render al template con resena y usuario
+    return render(request, '../templates/mostrar_resena.html', {"resena": resena, "user": user, "liked": liked, "autor_comentario": autor_comentario})
 
 
 
