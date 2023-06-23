@@ -58,12 +58,12 @@ def mostrar_resena(request, review_id):
         if liked == False:
             nueva_valoracion = Valoracion(id_usuario=user, id_res=resena)
             nueva_valoracion.save()
-            resena.likes = Valoracion.objects.filter(id_res=review_id).count()
+            liked = True
         elif liked == True:
             val = Valoracion.objects.filter(id_usuario=user, id_res=resena)
             val.delete()
             liked = False
-            resena.likes = Valoracion.objects.filter(id_res=review_id).count()   
+        resena.likes = Valoracion.objects.filter(id_res=review_id).count()   
     # Render al template con resena y usuario
     return render(request, '../templates/mostrar_resena.html', {"resena": resena, "user": user, "liked": liked, "autor_comentario": autor_comentario})
 
