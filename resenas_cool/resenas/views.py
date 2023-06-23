@@ -50,7 +50,7 @@ def mostrar_resena(request, review_id):
     # Obtenemos los comentarios
     comentarios = Comentario.objects.filter(id_resena=review_id)
     # Creamos una tupla con autor y comentario
-    autor_comentario = [(Usuario.objects.get(id=i.id_usuario_id), i.descripcion) for i in comentarios]
+    autor_comentario = [(Usuario.objects.get(id=i.id_usuario_id), i.descripcion, i.id) for i in comentarios]
 
     # Botón
     if request.method == 'POST':

@@ -83,9 +83,28 @@
             {% for comentario in autor_comentario %}
             <div class="card mb-3">
                 <div class="card-body">
-                  <h5 class="card-title">{{comentario.0}}</h5>
-                  <p class="card-text">{{comentario.1}}</p>
+                    <h5 class="card-title">{{comentario.0}}</h5>
+                    <p class="card-text">{{comentario.1}}</p>
+
+                    {% if user.id == comentario.0.id %}
+                    <div class="row">
+                    <div class="col col-lg-1">
+                    <form action="{% url 'borrar_comentario' comentario.2 %}" method="POST">
+                        {% csrf_token %}
+                        <input class="btn btn-secondary" type="submit" value = 'Borrar'>
+                    </form>
+                    </div>
+
+                    <div class="col col-lg-1">
+                    <form action="{% url 'modificar_comentario' comentario.2 %}" method="GET">
+                        <button class="btn btn-primary" type="submit">Modificar</button>
+                    </form>
+                    </div>
+                    </div>
+
+                  {% endif %}
                 </div>
+                 
             </div>
             {% endfor %}
             
