@@ -44,9 +44,12 @@ def mostrar_resena(request, review_id):
     resena = Resenas.objects.get(id=review_id)
     # Obtenemos el usuario
     user = request.user
+    print(user)
     # Obtenemos la cantidad de resenas
     resena.likes = Valoracion.objects.filter(id_res=review_id).count()
-    liked = Valoracion.objects.filter(id_usuario=user, id_res=resena).count() != 0
+    liked = False
+    if user.is_authenticated:
+        liked = Valoracion.objects.filter(id_usuario=user, id_res=resena).count() != 0
     # Obtenemos los comentarios
     comentarios = Comentario.objects.filter(id_resena=review_id)
     # Creamos una tupla con autor y comentario
