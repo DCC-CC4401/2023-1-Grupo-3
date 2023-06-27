@@ -99,7 +99,7 @@
                 <h6 class="card-subtitle text-muted pb-2">{{resena.titulo}}</h6>
                 <a class="card-text"> {{resena.descripcion}}</a>
                 <br>
-                <a class="text-black-50">@{{resena.id_usuario}}</a>
+                <a class="text-black-50" href="{% url 'ver_resenas' usuario=resena.id_usuario %}">@{{resena.id_usuario}}</a>
                 <form action="mostrar_resena/{{resena.id}}/" method="get">
                   <button class="btn btn-primary">Ver Más</button>
                 </form>
