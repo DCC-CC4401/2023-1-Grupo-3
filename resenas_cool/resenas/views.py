@@ -54,9 +54,14 @@ def mostrar_resena(request, review_id):
     comentarios = Comentario.objects.filter(id_resena=review_id)
     # Creamos una tupla con autor y comentario
     autor_comentario = [(Usuario.objects.get(id=i.id_usuario_id), i.descripcion, i.id) for i in comentarios]
+    # Vemos si esta logeado
+    auth = user.is_authenticated
 
     # Botón
     if request.method == 'POST':
+        # no esta logeado
+        if not user.is_authenticated:
+            return redirect('register')
         # Vemos si el usuario ya dio like
         if liked == False:
             nueva_valoracion = Valoracion(id_usuario=user, id_res=resena)
@@ -68,7 +73,7 @@ def mostrar_resena(request, review_id):
             liked = False
         resena.likes = Valoracion.objects.filter(id_res=review_id).count()   
     # Render al template con resena y usuario
-    return render(request, '../templates/mostrar_resena.html', {"resena": resena, "user": user, "liked": liked, "autor_comentario": autor_comentario})
+    return render(request, '../templates/mostrar_resena.html', {"resena": resena, "user": user, "liked": liked, "autor_comentario": autor_comentario, "auth": auth})
 
 
 
