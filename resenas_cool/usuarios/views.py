@@ -41,6 +41,12 @@ def register(request):
         username = request.POST["nombre"]
         password = request.POST["contraseña"]
 
+        # Checkeo de que no exista el usuario
+        if Usuario.objects.filter(username=username).exists():
+            # Mostramos mensaje de error
+            messages.error(request, "Nombre de usuario ya existente")
+            return HttpResponseRedirect("register") # Nos quedamos donde mismo
+
         # Checkeo de largo
         if len(username) < 5:
             # Mostramos mensaje de error
