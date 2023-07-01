@@ -2,20 +2,23 @@
 ### 2023-1-Grupo-3
 #### Pedro Astaburuaga - Valeria Gutiérrez - Kathleen Kohler - Demian Hott - Cristóbal Suazo
 
-Reseñas Cool es una aplicación web desarrollada con Django que permite a los usuarios crear, ver, modificar, puntuar y borrar reseñas de productos. Además, incluye un sistema de autenticación para permitir a los usuarios crear y gestionar sus propias reseñas, así como ver las reseñas de otros usuarios.
+Reseñas Cool es una aplicación web desarrollada con Django que permite a los usuarios crear, ver, modificar, puntuar y borrar reseñas de productos, además de agregar comentarios a las mismas. Además, incluye un sistema de autenticación para permitir a los usuarios crear y gestionar sus propias reseñas, así como ver las reseñas de otros usuarios.
 
 ## Características
 
 * Creación de nuevas reseñas por usuarios autenticados.
 * Visualización individual de reseñas.
-* Visualización agrupada de reseñas.
+* Visualización agrupada de reseñas por última fecha de creación.
+* Filtrar reseñas por categoría y usuarios.
 * Modificación y eliminación de reseñas existentes por el usuario autor de la reseña.
 * Asociación de reseñas a categorías predefinidas.
 * Sistema de autenticación de usuarios.
+* Valoración de reseñas.
+* Agregar, modificar y borrar comentarios a las reseñas.
 
 ## Modelo de Datos
 
-Los usuarios se trabajan con el modelo predefinido de Django Users, principalmente se usan los atributos id, username, password y email. Las reseñas y categorías se modelan de la siguiente forma:
+Los usuarios se trabajan con el modelo predefinido de Django Users, principalmente se usan los atributos id, username, password y email. Las reseñas, categorías, valoraciones y comentarios se modelan de la siguiente forma:
 
 ### Reseñas
 
@@ -36,6 +39,25 @@ Instancias predefinidas para clasificar las reseñas creadas. Tiene los siguient
 
 * Id
 * Nombre de la categoría
+
+### Valoraciones
+
+Cruce entre usuario y reseña que representa una valoración positiva del usuario por la reseña. La suma de todas
+las valoraciones de una reseña particular, representa la valoración total de la reseña. Tiene los siguientes
+atributos:
+
+* Id
+* Usuario valorador
+* Reseña valorada
+
+### Comentarios
+
+Representa el comentario que un usuario agrega a una reseña. Tiene los siguientes atributos:
+
+* Id
+* Usuario comentador
+* Reseña comentada
+* Contenido del comentario
 
 ## Requisitos
 
@@ -73,6 +95,10 @@ Para visualizar un ejemplo de uso de la aplicación se deben seguir los siguient
 3. Modificar o eliminar reseñas creadas
 
 4. Visualizar reseñas creadas por otros usuarios
+
+5. Mostrar en detalle la reseña de otro usuario y valorarla
+
+6. Agregar un comentario en dicha reseña, modificarlo y borrarlo
 
 
 
