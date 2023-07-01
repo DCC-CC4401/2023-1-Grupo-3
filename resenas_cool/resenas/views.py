@@ -3,6 +3,7 @@ from resenas.forms import NuevaResenaModelForm
 from comentarios.models import Comentario
 from resenas.models import Resenas, Categorias, Valoracion
 from usuarios.models import Usuario
+from comentarios.models import Comentario
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 
@@ -43,30 +44,36 @@ def mostrar_resena(request, review_id):
     resena = Resenas.objects.get(id=review_id)
     # Obtenemos el usuario
     user = request.user
-
+    print(user)
     # Obtenemos la cantidad de resenas
     resena.likes = Valoracion.objects.filter(id_res=review_id).count()
-    liked = Valoracion.objects.filter(id_usuario=user, id_res=resena).count() != 0
+    liked = False
+    if user.is_authenticated:
+        liked = Valoracion.objects.filter(id_usuario=user, id_res=resena).count() != 0
+    # Obtenemos los comentarios
+    comentarios = Comentario.objects.filter(id_resena=review_id)
+    # Creamos una tupla con autor y comentario
+    autor_comentario = [(Usuario.objects.get(id=i.id_usuario_id), i.descripcion, i.id) for i in comentarios]
+    # Vemos si esta logeado
+    auth = user.is_authenticated
+
     # Botón
     if request.method == 'POST':
+        # no esta logeado
+        if not user.is_authenticated:
+            return redirect('register')
         # Vemos si el usuario ya dio like
         if liked == False:
             nueva_valoracion = Valoracion(id_usuario=user, id_res=resena)
             nueva_valoracion.save()
-            resena.likes = Valoracion.objects.filter(id_res=review_id).count()
-            return render(request, '../templates/mostrar_resena.html', {"resena": resena, "user": user, "liked": liked})
+            liked = True
         elif liked == True:
             val = Valoracion.objects.filter(id_usuario=user, id_res=resena)
             val.delete()
             liked = False
-            resena.likes = Valoracion.objects.filter(id_res=review_id).count()
-            return render(request, '../templates/mostrar_resena.html', {"resena": resena, "user": user, "liked": liked})
-            
-        # Render al template con resena y usuario
-        return render(request, '../templates/mostrar_resena.html', {"resena": resena, "user": user, "liked": liked})
-    else:
-        # Render al template con resena y usuario
-        return render(request, '../templates/mostrar_resena.html', {"resena": resena, "user": user, "liked": liked})
+        resena.likes = Valoracion.objects.filter(id_res=review_id).count()   
+    # Render al template con resena y usuario
+    return render(request, '../templates/mostrar_resena.html', {"resena": resena, "user": user, "liked": liked, "autor_comentario": autor_comentario, "auth": auth})
 
 
 
