@@ -7,7 +7,7 @@ from django.contrib.auth import logout
 # Definimos funcion para mostrar las reseñas
 def ver_resenas(request, categoria=None, usuario=None):
     if request.method == 'GET':
-        resenas = Resenas.objects.all()
+        resenas = Resenas.objects.all().order_by('-id')
         error = None
         if request.GET.get("usuario"):
             usuario=request.GET.get("usuario")
